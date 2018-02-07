@@ -14,7 +14,6 @@
     name: OctoPrint
     state: present
   become: yes
-  become_method: sudo
 
 - name: Add user {{ username }} to OctoPrint group
   user: 
