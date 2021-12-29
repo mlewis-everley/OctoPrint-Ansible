@@ -1,3 +1,6 @@
+# python
+.Python
+
 # dotenv
 .env
 
@@ -5,6 +8,14 @@
 venv/
 ENV/
 .venv/
+pyvenv.cfg
+bin/
+include/
+lib/
+lib64
+pip-selfcheck.json
 
 # Ansible
 *.retry
+*.retry
+*.whl
