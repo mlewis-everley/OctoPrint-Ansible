@@ -4,7 +4,6 @@ OctoPrint-Ansible
 Ansible playbooks to install OctoPrint on a Raspberry Pi. These playbooks assume you have
 python 3 installed, and it's aliased to `python3`.
 
-
 Installation
 ------------
 
@@ -22,7 +21,7 @@ Create User
 This is an optional step if you want to create a new user and not use the 
 built in **pi** user
 
-```bash 
+```bash
 $ ./bin/ansible-playbook create_user.yml -i "<RPi IP Address>," --user pi --ask-pass --ask-su-pass
 ```
 
@@ -30,7 +29,6 @@ Note, once you create the custom user, the `ansible-playbook` commands can be
 simplified by exclusing the `--user`, `--ask-pass` and `--ask-su-pass` options 
 can be removed if your username matches the username you are executing from 
 match and your public key added to the authorized keys list
-
 
 Setup static ip
 ---------------
