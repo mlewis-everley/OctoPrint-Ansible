@@ -1,7 +1,8 @@
 ---
 - name: Installing required packages for haproxy
-  apt: name={{item}}
-       state=latest
+  apt:
+    name: "{{ item }}"
+    state: latest
   with_items:
     - haproxy
   become: yes
@@ -10,8 +11,9 @@
     - haproxy
 
 - name: Copy haproxy.cfg
-  template: src=haproxy.cfg.j2
-            dest=/etc/haproxy/haproxy.cfg
+  template:
+    src: "haproxy.cfg.j2"
+    dest: "/etc/haproxy/haproxy.cfg"
   become: yes
   become_method: sudo
   tags:
@@ -29,9 +31,10 @@
     - haproxy
 
 - name: Enable and start haproxy service
-  service: name=haproxy
-           enabled=yes
-           state=started
+  service:
+    name: haproxy
+    enabled: yes
+    state: started
   become: yes
   become_method: sudo
   tags:
