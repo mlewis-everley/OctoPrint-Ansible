@@ -15,10 +15,13 @@
     state: present
   become: yes
 
-- name: Add user {{ username }} to OctoPrint group
+- name: Add user {{ username }} to OctoPrint, tty and dialout groups
   user: 
     name: "{{ username }}"
-    groups: OctoPrint
+    groups:
+      - OctoPrint
+      - tty
+      - dialout
     append: yes
   become: yes
 
