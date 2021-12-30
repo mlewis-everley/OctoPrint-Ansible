@@ -1,6 +1,10 @@
 ---
 - hosts: all
   vars_prompt:
+    - name: "printer_name"
+      prompt: "Unique name of your printer (no spaces)"
+      private: false
+      default: "OctoPrint"
     - name: "install_dir"
       prompt: "Install directory"
       private: false
@@ -17,6 +21,14 @@
       prompt: "Webcam listening Port"
       private: false
       default: 8080
+    - name: "install_haproxy"
+      prompt: "Install haproxy [y/n]"
+      private: false
+      default: "y"
+    - name: "install_touchui"
+      prompt: "Install touchui [y/n]"
+      private: false
+      default: "y"
   roles:
     - git
     - octoprint

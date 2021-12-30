@@ -25,21 +25,22 @@
 - name: Installing required packages
   apt: 
     name: "{{ item }}"
-    state=latest
-    update_cache=yes
+    state: latest
+    update_cache: yes
     cache_valid_time: 3600
   with_items:
-    - python-virtualenv
-    - python-pip
-    - python-dev
+    - python3-virtualenv
+    - python3-pip
+    - python3-dev
     - avahi-daemon
+    - libpq-dev
   become: yes
   tags:
     - init
 
 - name: Create {{ install_dir }} directory
   file: 
-    path: "{{ install_dir }}:
+    path: "{{ install_dir }}"
     mode: 0755
     state: directory
     owner: "{{ username }}"
@@ -64,7 +65,7 @@
     - code
 
 - name: Create virtualenv {{ virtualenv_dir }} (if it does not already exist)
-  command: "virtualenv --prompt="(OctoPrint) " {{ virtualenv_dir }}"
+  command: "virtualenv --prompt=\"(OctoPrint) \" {{ virtualenv_dir }}"
   become: yes
   become_user: "{{ username }}"
   when: not virtualenv_stats.stat.exists
@@ -83,9 +84,18 @@
 
 - name: Install OctoPrint
   pip:
-    name: "{{ install_dir }}"
+    name: "OctoPrint"
     virtualenv: "{{ virtualenv_dir }}"
-    extra_args: "-e "
+  become: yes
+  become_user: "{{ username }}"
+  ignore_errors: yes
+  tags:
+    - code
+
+- name: Install Postgres Adapter
+  pip:
+    name: "psycopg2"
+    virtualenv: "{{ virtualenv_dir }}"
   become: yes
   become_user: "{{ username }}"
   ignore_errors: yes
@@ -95,7 +105,7 @@
 - name: Install OctoPrint systemd Unit
   template: 
     src: octoprint.service.j2
-    dest: /etc/systemd/system/octoprint.service
+    dest: "/etc/systemd/system/octoprint-{{ printer_name }}.service"
   become: yes
   tags:
     - service
@@ -108,7 +118,7 @@
 
 - name: Enable and start OctoPrint service
   service: 
-    name: octoprint
+    name: "octoprint-{{ printer_name }}"
     enabled: yes
     state: restarted
   become: yes
@@ -116,6 +126,10 @@
     - service
 
 - include: haproxy.yml
+  when: install_haproxy == "y" or install_haproxy == "Y"
+
 - include: touchui.yml
+  when: install_touchui == "y" or install_touchui == "Y"
+
 # excluded until completed
 #- include: webcam.yml
