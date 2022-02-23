@@ -44,3 +44,5 @@ Run the following command and follow the initial prompts.
 ```bash
 $  ./bin/ansible-playbook install_octoprint.yml -i "<RPi IP Address>," --user <username> --ask-pass --ask-su-pass
 ```
+
+**NOTE:** You must add at least one `,` to the list of hosts, even if only using a single IP 
