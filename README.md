@@ -22,7 +22,7 @@ This is an optional step if you want to create a new user and not use the
 built in **pi** user
 
 ```bash
-$ ./bin/ansible-playbook create_user.yml -i "<RPi IP Address>," --user pi --ask-pass --ask-su-pass
+$ ./bin/ansible-playbook create_user.yml -i "<RPi IP Address>," -u <username> --ask-pass --ask-become-pass
 ```
 
 Note, once you create the custom user, the `ansible-playbook` commands can be 
@@ -35,14 +35,14 @@ Setup static ip
 This is an optional step if you prefer to have a static IP address
 
 ```bash
-$  ./bin/ansible-playbook setup_static_ip.yml -i "<RPi IP Address>," --user <username> --ask-pass --ask-su-pass
+$  ./bin/ansible-playbook setup_static_ip.yml -i "<RPi IP Address>," -u <username> --ask-pass --ask-become-pass
 ```
 
 Install OctoPrint
 -----------------
 Run the following command and follow the initial prompts.
 ```bash
-$  ./bin/ansible-playbook install_octoprint.yml -i "<RPi IP Address>," --user <username> --ask-pass --ask-su-pass
+$  ./bin/ansible-playbook install_octoprint.yml -i "<RPi IP Address>," -u <username> --ask-pass --ask-become-pass
 ```
 
 **NOTE:** You must add at least one `,` to the list of hosts, even if only using a single IP 
