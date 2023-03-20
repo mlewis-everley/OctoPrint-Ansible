@@ -29,6 +29,39 @@
       prompt: "Install touchui [y/n]"
       private: false
       default: "y"
+    - name: "install_cost_estimator"
+      prompt: "Install Cost Estimator Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_detail_progress"
+      prompt: "Install Detailed Progress Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_filament_manager"
+      prompt: "Install Filament Manager Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_print_history"
+      prompt: "Install Print History Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_printtime_genius"
+      prompt: "Install PrintTime Genius Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_slicer_thumbs"
+      prompt: "Install Slicer Thumbnails Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_top_temp"
+      prompt: "Install Top Temp Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_ui_custom"
+      prompt: "Install UI Customiser Plugin [y/n]"
+      private: false
+      default: "y"
+
   roles:
     - git
     - octoprint

@@ -1,0 +1,64 @@
+---
+- name: "Plugin Install: Cost Estimator"
+  ansible.builtin.pip:
+    name: "https://github.com/OllisGit/OctoPrint-CostEstimation/releases/latest/download/master.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_cost_estimator == "y" or install_cost_estimator == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: Detail Progress"
+  ansible.builtin.pip:
+    name: "https://github.com/tpmullan/OctoPrint-DetailedProgress/archive/master.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_detail_progress == "y" or install_detail_progress == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: Filament Manager"
+  ansible.builtin.pip:
+    name: "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_filament_manager == "y" or install_filament_manager == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: Print History"
+  ansible.builtin.pip:
+    name: "https://github.com/imrahil/OctoPrint-PrintHistory/archive/master.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_print_history == "y" or install_print_history == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: PrintTime Genius"
+  ansible.builtin.pip:
+    name: "https://github.com/eyal0/OctoPrint-PrintTimeGenius/archive/master.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_printtime_genius == "y" or install_printtime_genius == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: Slicer Thumbnails"
+  ansible.builtin.pip:
+    name: "https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/master.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_slicer_thumbs == "y" or install_slicer_thumbs == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: Top Temp"
+  ansible.builtin.pip:
+    name: "https://github.com/LazeMSS/OctoPrint-TopTemp/archive/main.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_top_temp == "y" or install_top_temp == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: UI Customizer"
+  ansible.builtin.pip:
+    name: "https://github.com/LazeMSS/OctoPrint-UICustomizer/archive/main.zip"
+    virtualenv: "{{ virtualenv_dir }}"
+  when: install_ui_custom == "y" or install_ui_custom == "Y"
+  tags:
+    - plugins

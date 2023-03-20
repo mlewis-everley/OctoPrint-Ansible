@@ -128,6 +128,8 @@
   tags:
     - service
 
+- include: plugins.yml
+
 - include: haproxy.yml
   when: install_haproxy == "y" or install_haproxy == "Y"
 
