@@ -1,12 +1,12 @@
 ---
-- name: "Plugin Install: Cost Estimator"
+- name: "Plugin Install: Z-Probe Offset"
   pip:
-    name: "https://github.com/OllisGit/OctoPrint-CostEstimation/releases/latest/download/master.zip"
+    name: "https://framagit.org/razer/octoprint_z_probe_offset/-/archive/latest/octoprint_z_probe_offset-latest.zip"
     state: present
     virtualenv: "{{ install_dir }}/.venv"
     virtualenv_command: virtualenv
     virtualenv_python: python3
-  when: install_cost_estimator == "y" or install_cost_estimator == "Y"
+  when: install_z_offset == "y" or install_z_offset == "Y"
   tags:
     - plugins
 
@@ -84,5 +84,16 @@
     virtualenv_command: virtualenv
     virtualenv_python: python3
   when: install_ui_custom == "y" or install_ui_custom == "Y"
+  tags:
+    - plugins
+
+- name: "Plugin Install: Cancel Object"
+  pip:
+    name: "https://github.com/paukstelis/OctoPrint-Cancelobject/archive/master.zip"
+    state: present
+    virtualenv: "{{ install_dir }}/.venv"
+    virtualenv_command: virtualenv
+    virtualenv_python: python3
+  when: install_cancel_objects == "y" or install_cancel_objects == "Y"
   tags:
     - plugins

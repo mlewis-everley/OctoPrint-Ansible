@@ -29,8 +29,8 @@
       prompt: "Install touchui [y/n]"
       private: false
       default: "y"
-    - name: "install_cost_estimator"
-      prompt: "Install Cost Estimator Plugin [y/n]"
+    - name: "install_z_offset"
+      prompt: "Install Z Probe Offset Plugin [y/n]"
       private: false
       default: "y"
     - name: "install_detail_progress"
@@ -59,6 +59,10 @@
       default: "y"
     - name: "install_ui_custom"
       prompt: "Install UI Customiser Plugin [y/n]"
+      private: false
+      default: "y"
+    - name: "install_cancel_objects"
+      prompt: "Install Cancel Objects Plugin [y/n]"
       private: false
       default: "y"
 
