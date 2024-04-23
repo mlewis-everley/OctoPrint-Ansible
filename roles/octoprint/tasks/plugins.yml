@@ -23,7 +23,7 @@
 
 - name: "Plugin Install: Filament Manager"
   pip:
-    name: "https://github.com/OllisGit/OctoPrint-FilamentManager/releases/latest/download/master.zip"
+    name: "https://github.com/bitsy-ai/OctoPrint-FilamentManager/zipball/fix-python-10-compat"
     state: present
     virtualenv: "{{ install_dir }}/.venv"
     virtualenv_command: virtualenv
