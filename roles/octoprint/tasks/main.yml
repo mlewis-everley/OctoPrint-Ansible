@@ -5,7 +5,7 @@
 - name: Setting new hostname
   hostname: 
     name: "{{ new_hostname }}"
-  become: yes
+  become: true
   tags:
     - init
 
@@ -13,7 +13,7 @@
   group: 
     name: OctoPrint
     state: present
-  become: yes
+  become: true
 
 - name: Add user {{ username }} to OctoPrint, tty and dialout groups
   user: 
@@ -23,7 +23,7 @@
       - tty
       - dialout
     append: yes
-  become: yes
+  become: true
 
 - name: Installing required packages
   apt: 
@@ -37,7 +37,7 @@
     - python3-dev
     - avahi-daemon
     - libpq-dev
-  become: yes
+  become: true
   tags:
     - init
 
@@ -48,7 +48,7 @@
     state: directory
     owner: "{{ username }}"
     group: OctoPrint
-  become: yes
+  become: true
   tags:
     - init
 
@@ -56,7 +56,7 @@
   git: 
     repo: https://github.com/foosel/OctoPrint.git
     dest: "{{ install_dir }}"
-  become: yes
+  become: true
   become_user: "{{ username }}"
   tags:
     - code
@@ -69,7 +69,7 @@
 
 - name: Create virtualenv {{ virtualenv_dir }} (if it does not already exist)
   command: "virtualenv --prompt=\"(OctoPrint) \" {{ virtualenv_dir }}"
-  become: yes
+  become: true
   become_user: "{{ username }}"
   when: not virtualenv_stats.stat.exists
   tags:
@@ -80,7 +80,7 @@
     name: pip
     state: latest
     virtualenv: "{{ virtualenv_dir }}"
-  become: yes
+  become: true
   become_user: "{{ username }}"
   tags:
     - code
@@ -89,9 +89,9 @@
   pip:
     name: "OctoPrint"
     virtualenv: "{{ virtualenv_dir }}"
-  become: yes
+  become: true
   become_user: "{{ username }}"
-  ignore_errors: yes
+  ignore_errors: true
   tags:
     - code
 
@@ -99,9 +99,9 @@
   pip:
     name: "psycopg2"
     virtualenv: "{{ virtualenv_dir }}"
-  become: yes
+  become: true
   become_user: "{{ username }}"
-  ignore_errors: yes
+  ignore_errors: true
   tags:
     - code
 
@@ -109,13 +109,13 @@
   template: 
     src: octoprint.service.j2
     dest: "/etc/systemd/system/octoprint-{{ printer_name }}.service"
-  become: yes
+  become: true
   tags:
     - service
 
 - name: reload systemd
   command: systemctl daemon-reload
-  become: yes
+  become: true
   tags:
     - service
 
@@ -124,7 +124,7 @@
     name: "octoprint-{{ printer_name }}"
     enabled: yes
     state: restarted
-  become: yes
+  become: true
   tags:
     - service
 
@@ -135,6 +135,14 @@
 
 - include: touchui.yml
   when: install_touchui == "y" or install_touchui == "Y"
+
+- name: Restart octoprint to register new changes
+  service: 
+    name: "octoprint-{{ printer_name }}"
+    state: restarted
+  become: true
+  tags:
+    - service
 
 # excluded until completed
 #- include: webcam.yml
